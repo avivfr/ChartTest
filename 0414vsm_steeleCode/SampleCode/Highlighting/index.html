@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Automatic Highlighting</title>
+    <link type="text/css" href="../style.css"  rel="stylesheet"/>
+    <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/default.min.css">
+</head>
+<body>
+    <div>Here's an easy way to display some highlighted XML</div>
+    <div>
+        <pre>
+            <code data-bind="hljs: xmlData, style: 'xml'"></code>
+        </pre>
+    </div>
+    <div>Let's see some C#</div>
+    <div>
+        <pre>
+            <code data-bind="hljs: csharpCode, style: 'c#'"></code>
+        </pre>
+    </div>
+    <div>Finally, some javascript</div>
+    <div>
+        <pre>
+            <code data-bind="hljs: jsCode, style: 'javascript'"></code>
+        </pre>
+    </div>
+    <script type="text/javascript" src="../jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../knockout-3.0.0.js"></script>
+    <script type="text/javascript" src="hljsBinding.js"></script>
+    <script type="text/javascript" src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            var viewModel = {
+                xmlData: '<root>\n    <child name="Jack" age="19">\n        Node Text\n    </child>\n</root>',
+                csharpCode: 'using System;\n\nConsole.WriteLine("The C# Corner");',
+                jsCode: 'this.amazed = function() { alert("Wow!"); };'
+            };
+            ko.applyBindings(viewModel);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Google Charts - Gauge Binding</title>
+        <link type="text/css" href="../style.css" rel="stylesheet"/>
+        <link type="text/css" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <div>
+            Pick your volume
+        </div>
+        <div data-bind="slider: volume, updateDuringSlide: true, sliderOptions: { min: 0, max: 50 }"></div>
+        <div>
+            Value: <input type="text" data-bind="value: volume, valueUpdate: 'afterkeypress'"/>
+        </div>
+        <script type="text/javascript" src="../jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+        <script type="text/javascript" src="../knockout-3.0.0.js"></script>
+        <script type="text/javascript" src="sliderBinding.js"></script>
+        <script type="text/javascript">
+            $(function() {
+                var vm = {
+                    volume: ko.observable(0)
+                };
+
+                ko.applyBindings(vm);
+            });
+        </script>
+    </body>
+</html>

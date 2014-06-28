@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Charts - Gauge Binding</title>
+    <link type="text/css" href="../style.css"  rel="stylesheet"/>
+    <script type='text/javascript' src='https://www.google.com/jsapi'></script>
+    <script type="text/javascript">
+        google.load('visualization', '1', {packages:['gauge']});
+    </script>
+</head>
+<body>
+<div>
+    <div id="hours"></div>
+    <div id="minutes"></div>
+    <div id="seconds"></div>
+</div>
+<script type="text/javascript" src="../jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+    var hourChart, minuteChart, secondChart;
+    var hourOptions = { min: 0, max: 23, width: 200, height: 200 };
+    var minuteOptions = { min: 0, max: 59, width: 200, height: 200 };
+    var secondOptions = {min: 0, max: 59, width: 200, height: 200, animation: { duration: 0 } };
+
+    $(function() {
+        hourChart = new google.visualization.Gauge($('#hours')[0]);
+        minuteChart = new google.visualization.Gauge($('#minutes')[0]);
+        secondChart = new google.visualization.Gauge($('#seconds')[0]);
+
+        loop();
+    });
+
+    function loop() {
+        updateCharts();
+        window.setTimeout(loop, 1000);
+    }
+
+    function updateCharts() {
+        var d = new Date();
+
+        hourChart.draw(createDataTable('Hours', d.getHours()), hourOptions);
+        minuteChart.draw(createDataTable('Minutes', d.getMinutes()), minuteOptions);
+        secondChart.draw(createDataTable('Seconds', d.getSeconds()), secondOptions);
+    }
+
+    function createDataTable(caption, value) {
+        return google.visualization.arrayToDataTable([
+            ['Label', 'Value'],
+            [caption, value]
+        ]);
+    }
+</script>
+</body>
+</html>
